@@ -36,6 +36,7 @@ function getPost(id) {
             }
             resolve(result)
           })
+          .catch(reject)
       })
       .catch(reject);
   });
