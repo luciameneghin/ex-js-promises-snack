@@ -21,6 +21,30 @@ getPostTitle(2)
   .then(post => console.log(`Titolo del post: ${post}`))
   .catch(error => console.error("Errore:", error));
 
+//BONUS SNACK 1
+function getPost(id) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://dummyjson.com/posts/${id}`)
+      .then(response => response.json())
+      .then(post => {
+        fetch(`https://dummyjson.com/users/${post.userId}`)
+          .then(response => response.json())
+          .then(user => {
+            const result = {
+              ...post,
+              user
+            }
+            resolve(result)
+          })
+      })
+      .catch(reject);
+  });
+}
+
+getPost(5)
+  .then(posts => console.log(posts))
+  .catch(error => console.error("Errore:", error));
+
 
 
 
@@ -40,3 +64,5 @@ function lanciaDado() {
 lanciaDado()
   .then(result => console.log("Risultato del dado:", result))
   .catch(error => console.error("Errore:", error))
+
+//BONUS SNACK 2
